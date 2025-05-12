@@ -2,6 +2,7 @@ package com.ping.filter;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Represents a logical AND operation on a set of filters. This filter will return {@code true}
@@ -47,5 +48,12 @@ public class AndFilter implements Filter {
             if (!f.matches(resource)) return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "(AND " + filters.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(" ")) + ")";
     }
 }

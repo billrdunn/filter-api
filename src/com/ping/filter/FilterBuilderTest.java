@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -80,5 +81,14 @@ public class FilterBuilderTest {
                 FilterBuilder.greaterThan("score", 300)
         );
         assertTrue(filter.matches(resource));
+    }
+
+    @Test
+    void testToStringForAnd() {
+        Filter f = FilterBuilder.and(
+                FilterBuilder.greaterThan("age", 30),
+                FilterBuilder.alwaysTrue()
+        );
+        assertEquals("(AND (GREATER_THAN age 30.0) TRUE)", f.toString());
     }
 }
